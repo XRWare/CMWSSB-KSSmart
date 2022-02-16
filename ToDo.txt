@@ -1,9 +1,9 @@
 
 IPAD
 
-1.videoplayer Controller
-2.Videoplaer UI
-3.Video Selection Functionality
+1.videoplayer Controller - done -except language change 
+2.Videoplaer UI - done
+3.Video Selection Functionality - done
 4.Language Functionality
 5.connect Stats
 
@@ -11,7 +11,7 @@ PC
 
 1. First Screen 
 2. Level Design
-3. video player functionality
+3. video player functionality - done
 4. Stats 
 
 
