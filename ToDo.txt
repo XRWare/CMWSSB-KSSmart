@@ -1,0 +1,18 @@
+
+IPAD
+
+1.videoplayer Controller
+2.Videoplaer UI
+3.Video Selection Functionality
+4.Language Functionality
+5.connect Stats
+
+PC
+
+1. First Screen 
+2. Level Design
+3. video player functionality
+4. Stats 
+
+
+//General - Tamil font for unity
