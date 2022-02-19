@@ -22,11 +22,18 @@ namespace Invector.vCharacterController
         [HideInInspector] public Camera cameraMain;
 
         #endregion
-
+        public static Vector3 StartPosition;
         protected virtual void Start()
         {
             InitilizeController();
             InitializeTpCamera();
+
+            StartPosition = transform.position;
+        }
+
+        public static void ResetPosition(Transform t)
+        {
+            t.position = StartPosition;
         }
 
         protected virtual void FixedUpdate()

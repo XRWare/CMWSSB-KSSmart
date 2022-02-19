@@ -25,6 +25,7 @@ public class Controller : NetworkBehaviour
 
     public int index = 0;
 
+    public int language = 0;
     public bool isStatic;
 
     public void Start()
@@ -44,6 +45,7 @@ public class Controller : NetworkBehaviour
             isStatic = true;
         }
 
+        LocalizationManager.instance.Init(language == 0 ? Languages.ENGLISH : Languages.TAMIL);
 
 
     }
@@ -86,16 +88,19 @@ public class Controller : NetworkBehaviour
 
 
     [TargetRpc]
-    public void Interactable()
+    public void Interactable(bool val)
     {
-        UIController.instance.SetInteractable();
+        UIController.instance.SetInteractable(val);
     }
 
 
     [Command]
-    public void BackButton()
+    public void BackButton(int a)
     {
 
+        VideoSelection.instance?.OnBack(a);
+
+        CollisionManager.instance?.OnBack(a);
     }
 
     ///Video
@@ -117,7 +122,7 @@ public class Controller : NetworkBehaviour
     [TargetRpc]
     public void VideoCompleted()
     {
-        UIController.instance.LoadThirdScreen();
+        VideoController.instance.Pause();
     }
 
 
@@ -158,5 +163,24 @@ public class Controller : NetworkBehaviour
     public void UpdateVolume(float a)
     {
         VideoController.instance.UpdateVolume(a);
+    }
+
+
+    [Command]
+    public void UpdateLanguage(int index, bool UpdateAudio)
+    {
+        language = index;
+        if (UpdateAudio)
+        {
+            VideoSelection.instance.UpdateAudio(index);
+        }
+        LocalizationManager.instance.SetLanguage(index == 0 ? Languages.ENGLISH : Languages.TAMIL);
+    }
+
+
+    [Command]
+    public void StartFunction()
+    {
+        CollisionManager.instance.OnClickStart();
     }
 }

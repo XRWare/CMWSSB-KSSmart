@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Mirror.Discovery;
+using UnityEngine.SceneManagement;
 
 public class Manager : NetworkManager
 {
@@ -13,9 +14,18 @@ public class Manager : NetworkManager
 
     public GameObject clientObjects;
 
+    public GameObject videoScreen;
+
+    public static Manager instance;
+
     public override void Start()
     {
+        instance = this;
         base.Start();
+
+
+
+        SceneManager.sceneUnloaded += SceneChange;
 
         if (Server)
         {
@@ -39,6 +49,17 @@ public class Manager : NetworkManager
 
 
     }
+
+    public void SceneChange(Scene a)
+    {
+        if (a.buildIndex == 1)
+
+        {
+            serverObjects.SetActive(true);
+            clientObjects.SetActive(false);
+        }
+    }
+
 
     public override void OnServerReady(NetworkConnection conn)
     {

@@ -4,15 +4,15 @@ IPAD
 1.videoplayer Controller - done -except language change 
 2.Videoplaer UI - done
 3.Video Selection Functionality - done
-4.Language Functionality
-5.connect Stats
+4.Language Functionality - done
+5.connect Stats - done
 
 PC
 
-1. First Screen 
-2. Level Design
+1. First Screen - done
+2. Level Design - done
 3. video player functionality - done
-4. Stats 
+4. Stats - done
 
 
 //General - Tamil font for unity

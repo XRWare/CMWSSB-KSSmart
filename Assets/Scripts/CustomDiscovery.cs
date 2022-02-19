@@ -41,7 +41,7 @@ namespace Mirror.Discovery
                 return;
 
             // if (!NetworkClient.isConnected && !NetworkServer.active && !NetworkClient.active)
-            //    // DrawGUI();
+            //     DrawGUI();
 
             // if (NetworkServer.active || NetworkClient.active)
             //     StopButtons();
@@ -52,25 +52,25 @@ namespace Mirror.Discovery
             GUILayout.BeginArea(new Rect(100, 100, 1000, 1000));
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("Find Servers"))
-            {
-                discoveredServers.Clear();
-                networkDiscovery.StartDiscovery();
-            }
+            // if (GUILayout.Button("Find Servers"))
+            // {
+            //     discoveredServers.Clear();
+            //     networkDiscovery.StartDiscovery();
+            // }
 
             // LAN Host
-            if (GUILayout.Button("Start Host"))
-            {
-                StartServer();
-            }
+            // if (GUILayout.Button("Start Host"))
+            // {
+            //     StartServer();
+            // }
 
             // Dedicated server
-            if (GUILayout.Button("Start Server"))
-            {
-                discoveredServers.Clear();
-                NetworkManager.singleton.StartServer();
-                networkDiscovery.AdvertiseServer();
-            }
+            // if (GUILayout.Button("Start Server"))
+            // {
+            //     discoveredServers.Clear();
+            //     NetworkManager.singleton.StartServer();
+            //     networkDiscovery.AdvertiseServer();
+            // }
 
             GUILayout.EndHorizontal();
 
@@ -96,10 +96,11 @@ namespace Mirror.Discovery
             // stop host if host mode
             if (NetworkServer.active && NetworkClient.isConnected)
             {
+
+
                 if (GUILayout.Button("Stop Host"))
                 {
-                    NetworkManager.singleton.StopHost();
-                    networkDiscovery.StopDiscovery();
+
                 }
             }
             // stop client if client-only
@@ -107,8 +108,7 @@ namespace Mirror.Discovery
             {
                 if (GUILayout.Button("Stop Client"))
                 {
-                    NetworkManager.singleton.StopClient();
-                    networkDiscovery.StopDiscovery();
+
                 }
             }
             // stop server if server-only
@@ -116,8 +116,6 @@ namespace Mirror.Discovery
             {
                 if (GUILayout.Button("Stop Server"))
                 {
-                    NetworkManager.singleton.StopServer();
-                    networkDiscovery.StopDiscovery();
                 }
             }
 

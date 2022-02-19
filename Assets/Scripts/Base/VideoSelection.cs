@@ -5,6 +5,7 @@ using UnityEngine.Video;
 
 public class VideoSelection : MonoBehaviour
 {
+
     public static VideoSelection instance;
 
     public VideoStorage[] videos;
@@ -15,6 +16,8 @@ public class VideoSelection : MonoBehaviour
 
     public int language;
 
+    public int videoIndex;
+
     public VideoClip CurrentVideo;
 
     public GameObject videoThumbnailPanel;
@@ -22,9 +25,10 @@ public class VideoSelection : MonoBehaviour
     public GameObject videoPlayerPanel;
 
 
-    public GameObject soundButton;
 
-    public GameObject soundPanel;
+    private bool sliderUpdated = false;
+
+
 
 
     void Start()
@@ -38,18 +42,22 @@ public class VideoSelection : MonoBehaviour
 
             item.SetActive(false);
         }
-
+        sliderUpdated = false;
 
     }
 
     void OnEnable()
     {
+        GameObject.FindObjectOfType<Manager>().serverObjects.SetActive(false);
+
         player.loopPointReached += OnVideoCompleted;
     }
 
     void OnDisable()
     {
         player.loopPointReached -= OnVideoCompleted;
+
+        GameObject.FindObjectOfType<Manager>().serverObjects.SetActive(true);
     }
 
     public void SelectVideo(int index)
@@ -67,6 +75,7 @@ public class VideoSelection : MonoBehaviour
         videoPanel[index].SetActive(true);
         player.clip = null;
         CurrentVideo = videos[index].videoClip[language];
+        videoIndex = index;
     }
 
     public void PlayVideo()
@@ -74,15 +83,23 @@ public class VideoSelection : MonoBehaviour
         videoPlayerPanel.SetActive(true);
         videoThumbnailPanel.SetActive(false);
 
-        if (!player.clip)
+        if (!player.clip || player.clip != CurrentVideo)
         {
+
+            UpdateAudio(Controller.instance.language);
+
             player.clip = CurrentVideo;
             player.Play();
+
+            Controller.instance.UpdateSlider((float)player.time, (float)player.length);
+            sliderUpdated = true;
         }
 
         if (player.isPaused)
         {
             player.Play();
+
+
         }
 
 
@@ -98,8 +115,9 @@ public class VideoSelection : MonoBehaviour
 
         player.frame = (long)(player.frameCount * percent);
 
-        player.Play();
-        Controller.instance.UpdateSlider((float)player.time, (float)player.length);
+        // Controller.instance.UpdateSlider(percent, 1);
+        sliderUpdated = true;
+
     }
 
     public void SetVolume(float percent)
@@ -114,9 +132,13 @@ public class VideoSelection : MonoBehaviour
 
     void LateUpdate()
     {
-        if (player.isPlaying && player.frameCount > 0)
+        if (player.isPlaying && player.frameCount > 0 && !sliderUpdated)
         {
             Controller.instance.UpdateSlider((float)player.time, (float)player.length);
+        }
+        else
+        {
+            sliderUpdated = false;
         }
     }
 
@@ -125,8 +147,49 @@ public class VideoSelection : MonoBehaviour
     {
         Controller.instance.VideoCompleted();
 
-        videoPlayerPanel.SetActive(false);
-        videoThumbnailPanel.SetActive(true);
+    }
+
+
+    public void UpdateAudio(int val)
+    {
+
+        language = val;
+        //if (player.isPlaying)
+        {
+
+            player.Pause();
+            var a = player.frame;
+
+            videoPanel[videoIndex].SetActive(true);
+
+            CurrentVideo = videos[videoIndex].videoClip[language];
+            player.clip = CurrentVideo;
+
+            player.frame = a;
+            player.Play();
+        }
+
+    }
+
+
+    public void OnBack(int a)
+    {
+        if (a == 1)
+        {
+            CollisionManager.instance.BeginScreen.SetActive(true);
+        }
+        else if (a == 2)
+        {
+            Invector.vCharacterController.vThirdPersonInput.ResetPosition(CollisionManager.instance.gameObject.transform);
+            gameObject.transform.parent.gameObject.SetActive(false);
+        }
+        else if (a == 3)
+        {
+
+            player.Pause();
+            videoPlayerPanel.SetActive(false);
+            videoThumbnailPanel.SetActive(true);
+        }
     }
 }
 
@@ -136,5 +199,6 @@ public class VideoStorage
 {
 
     public VideoClip[] videoClip;
+
 
 }

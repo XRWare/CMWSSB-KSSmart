@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 public enum Languages
 {
     ENGLISH = 0,
-    HINDI = 1,
-    MARATHI = 2
+    TAMIL = 1
 }
 
 public class LocalizationManager : MonoBehaviour
@@ -18,8 +17,9 @@ public class LocalizationManager : MonoBehaviour
 
     [SerializeField]
     private List<LocalizedComponent> localizedComponents = new List<LocalizedComponent>();
+
     [SerializeField]
-    private Languages currentLanguage;
+    public Languages currentLanguage;
 
     public void Awake()
     {
@@ -50,6 +50,17 @@ public class LocalizationManager : MonoBehaviour
             localizedComponents[i].SetLanguage(language);
         }
     }
+
+
+    public void UpdateLanguage()
+    {
+
+        for (int i = 0; i < localizedComponents.Count; i++)
+        {
+            localizedComponents[i].SetLanguage(currentLanguage);
+        }
+    }
+
 
     public void AddLComponent(LocalizedComponent l)
     {

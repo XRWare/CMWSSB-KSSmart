@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class VideoController : MonoBehaviour
 {
 
@@ -22,17 +22,33 @@ public class VideoController : MonoBehaviour
 
 
 
+
+    private PanelObjects currentPanelObject;
+
+
+    public LocalizedComponent title;
+
+    public LocalizedComponent description;
+
     void Start()
     {
         instance = this;
+
+        // SetAudio(Controller.instance.language);
+        //LocalizationManager.instance.Init(Languages.TAMIL);
     }
+
 
 
     public void Play()
     {
+        volumeSliderPanel.SetActive(false);
         Controller.instance.PlayPause(true);
         playerPlaButton.gameObject.SetActive(false);
         playerPauseButton.gameObject.SetActive(true);
+        slider.value = 0;
+        UIController.instance.UpdateLanguage();
+        // LocalizationManager.instance.SetLanguage(Controller.instance.language == 1 ? Languages.TAMIL : Languages.ENGLISH);
     }
 
     public void Pause()
@@ -59,13 +75,27 @@ public class VideoController : MonoBehaviour
     }
 
 
+    public void SelVid(GameObject g)
+    {
+        currentPanelObject = g.GetComponent<PanelObjects>();
 
+        title.EnglishTranslated = currentPanelObject.title.EnglishTranslated;
+        title.TamilTranslated = currentPanelObject.title.TamilTranslated;
+
+        description.EnglishTranslated = currentPanelObject.description.EnglishTranslated;
+
+        description.TamilTranslated = currentPanelObject.description.TamilTranslated;
+
+    }
     public void SelectVideo(int a)
     {
         playbutton.gameObject.SetActive(true);
         Controller.instance.SelectVideo(a);
         playerPlaButton.gameObject.SetActive(true);
         playerPauseButton.gameObject.SetActive(false);
+
+
+        UIController.instance.UpdateLanguage();
     }
 
     public void UpdateVolume(float a)
@@ -92,5 +122,14 @@ public class VideoController : MonoBehaviour
             volumeSliderPanel.SetActive(false);
         }
     }
+
+    // public void SetAudio(int index)
+    // {
+    //     LanguageToggle.isOn = index == 1;
+    // }
+
+
+
+
 
 }
