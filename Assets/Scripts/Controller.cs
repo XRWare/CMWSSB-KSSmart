@@ -24,7 +24,7 @@ public class Controller : NetworkBehaviour
     public static Controller instance;
 
     public int index = 0;
-
+    public int SelectedLevel = 0;
     public int language = 0;
     public bool isStatic;
 
@@ -88,8 +88,9 @@ public class Controller : NetworkBehaviour
 
 
     [TargetRpc]
-    public void Interactable(bool val)
+    public void Interactable(bool val, int index)
     {
+        SelectedLevel = index;
         UIController.instance.SetInteractable(val);
     }
 
@@ -182,5 +183,13 @@ public class Controller : NetworkBehaviour
     public void StartFunction()
     {
         CollisionManager.instance.OnClickStart();
+    }
+
+
+    [TargetRpc]
+    public void SyncVideo(int count)
+    {
+        UIController.instance.PlayUpdatedAudio(count);
+
     }
 }

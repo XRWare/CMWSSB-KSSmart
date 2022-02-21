@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 1762467350440553000}
   - component: {fileID: 1762467350440552998}
   - component: {fileID: 4213628180751713193}
+  - component: {fileID: 5819944758092201949}
   m_Layer: 5
   m_Name: Video
   m_TagString: Untagged
@@ -220,6 +221,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 1762467351448391854}
   description: {fileID: 1762467350545066477}
+--- !u!114 &5819944758092201949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762467350440553002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f6ea76e199913428256d2a8373f1d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pic: {fileID: 3856330858383228606}
+  title: {fileID: 1762467351448391857}
+  description: {fileID: 1762467350545066480}
+  useFrame: 0
+  index: 0
 --- !u!1 &1762467350545066482
 GameObject:
   m_ObjectHideFlags: 0

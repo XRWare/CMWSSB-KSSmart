@@ -74,7 +74,7 @@ public class VideoSelection : MonoBehaviour
 
         videoPanel[index].SetActive(true);
         player.clip = null;
-        CurrentVideo = videos[index].videoClip[language];
+        CurrentVideo = VideoStore._instance.VideoInfo[CollisionManager.instance.val].v_Data[index].clip[language];
         videoIndex = index;
     }
 
@@ -91,14 +91,13 @@ public class VideoSelection : MonoBehaviour
             player.clip = CurrentVideo;
             player.Play();
 
-            Controller.instance.UpdateSlider((float)player.time, (float)player.length);
+            //Controller.instance.UpdateSlider((float)player.time, (float)player.length);
             sliderUpdated = true;
         }
 
         if (player.isPaused)
         {
             player.Play();
-
 
         }
 
@@ -113,10 +112,13 @@ public class VideoSelection : MonoBehaviour
     public void SetDuration(float percent)
     {
 
+
+
         player.frame = (long)(player.frameCount * percent);
 
+
         // Controller.instance.UpdateSlider(percent, 1);
-        sliderUpdated = true;
+        Debug.Log("Frame server " + player.frame);
 
     }
 
@@ -132,14 +134,11 @@ public class VideoSelection : MonoBehaviour
 
     void LateUpdate()
     {
-        if (player.isPlaying && player.frameCount > 0 && !sliderUpdated)
+        if (player.isPlaying)
         {
             Controller.instance.UpdateSlider((float)player.time, (float)player.length);
         }
-        else
-        {
-            sliderUpdated = false;
-        }
+
     }
 
 
@@ -162,11 +161,17 @@ public class VideoSelection : MonoBehaviour
 
             videoPanel[videoIndex].SetActive(true);
 
-            CurrentVideo = videos[videoIndex].videoClip[language];
+            CurrentVideo = VideoStore._instance.VideoInfo[CollisionManager.instance.val].v_Data[videoIndex].clip[language];
             player.clip = CurrentVideo;
 
             player.frame = a;
+
+            {
+                Controller.instance.SyncVideo((int)a);
+            }
+
             player.Play();
+
         }
 
     }
@@ -180,6 +185,12 @@ public class VideoSelection : MonoBehaviour
         }
         else if (a == 2)
         {
+            foreach (var item in videoPanel)
+            {
+
+                item.SetActive(false);
+            }
+
             Invector.vCharacterController.vThirdPersonInput.ResetPosition(CollisionManager.instance.gameObject.transform);
             gameObject.transform.parent.gameObject.SetActive(false);
         }

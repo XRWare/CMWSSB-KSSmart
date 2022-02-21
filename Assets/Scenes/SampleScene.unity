@@ -477,8 +477,8 @@ RectTransform:
   m_Father: {fileID: 1958555194}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.211, y: 0}
-  m_AnchorMax: {x: 0.211, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1010,7 +1010,6 @@ GameObject:
   m_Component:
   - component: {fileID: 320898106}
   - component: {fileID: 320898107}
-  - component: {fileID: 320898108}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1089,35 +1088,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &320898108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 320898105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 629249190}
-          m_MethodName: SetVolume
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+      m_Calls:
+      - m_Target: {fileID: 629249190}
+        m_MethodName: SetVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &330058208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,6 +1854,16 @@ PrefabInstance:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 2800000, guid: 3452659944bfdcf488f124b38b39f1e5, type: 3}
+    - target: {fileID: 5024697915155757117, guid: c10c2e9fd663e2740afabc7b69c8cbf9,
+        type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 2800000, guid: 9cebd6075f56577458723853ac7365bb, type: 3}
+    - target: {fileID: 5024697915155757117, guid: c10c2e9fd663e2740afabc7b69c8cbf9,
+        type: 3}
+      propertyPath: index
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c10c2e9fd663e2740afabc7b69c8cbf9, type: 3}
 --- !u!224 &493442895 stripped
@@ -1990,7 +1982,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1085505701}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2324,17 +2316,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 622957280}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &622957283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2433,6 +2414,7 @@ MonoBehaviour:
   languageToggleVid: {fileID: 1569723607}
   text: {fileID: 1190470395}
   startButton: {fileID: 2096987968}
+  AudioUpdated: 0
 --- !u!114 &629249190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2454,6 +2436,9 @@ MonoBehaviour:
   volumeSliderPanel: {fileID: 1712916135}
   title: {fileID: 1361200064}
   description: {fileID: 520258247}
+  player: {fileID: 1085505702}
+  currentVideo: {fileID: 0}
+  languageUpdated: 0
 --- !u!114 &629249191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3088,7 +3073,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.211, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3359,7 +3344,7 @@ RectTransform:
   - {fileID: 1569723606}
   - {fileID: 1357117687}
   m_Father: {fileID: 1085505701}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -3641,6 +3626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1085505701}
+  - component: {fileID: 1085505702}
   m_Layer: 5
   m_Name: Video
   m_TagString: Untagged
@@ -3659,6 +3645,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1171644556}
   - {fileID: 1005830597}
   - {fileID: 1361200060}
   - {fileID: 520258243}
@@ -3670,6 +3657,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!328 &1085505702
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085505700}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 0}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8600000, guid: e26976ad78830d348b5c3a1c50c2d254, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: _MainTex
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 0
+  m_FrameReadyEventEnabled: 0
 --- !u!1 &1097919112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3915,6 +3936,11 @@ PrefabInstance:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 2800000, guid: 176181e324234e74bb7103136cc5cadc, type: 3}
+    - target: {fileID: 5024697915155757117, guid: c10c2e9fd663e2740afabc7b69c8cbf9,
+        type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 2800000, guid: afc1f4ecbdcff7748a784b17612054ab, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c10c2e9fd663e2740afabc7b69c8cbf9, type: 3}
 --- !u!224 &1124254967 stripped
@@ -3995,6 +4021,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1171644555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1171644556}
+  - component: {fileID: 1171644558}
+  - component: {fileID: 1171644557}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1171644556
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171644555}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1085505701}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1171644557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171644555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8600000, guid: e26976ad78830d348b5c3a1c50c2d254, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1171644558
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171644555}
+  m_CullTransparentMesh: 0
 --- !u!1 &1190470393
 GameObject:
   m_ObjectHideFlags: 0
@@ -4497,7 +4594,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.211
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4514,21 +4611,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 2
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 629249190}
           m_MethodName: SetVideoVal
-          m_Mode: 1
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
         - m_Target: {fileID: 629249190}
           m_MethodName: Pause
           m_Mode: 1
@@ -4545,30 +4646,26 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 629249190}
-          m_MethodName: Play
-          m_Mode: 1
+          m_MethodName: DelayPlay
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 0.5
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 5
-    callback:
-      m_PersistentCalls:
-        m_Calls:
         - m_Target: {fileID: 629249190}
           m_MethodName: SetVideoVal
-          m_Mode: 1
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!1 &1282225392
 GameObject:
@@ -4808,7 +4905,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1085505701}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5119,6 +5216,11 @@ PrefabInstance:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 2800000, guid: 3452659944bfdcf488f124b38b39f1e5, type: 3}
+    - target: {fileID: 5819944758092201949, guid: 92706dcbb5573ce48aa597bec95d2f52,
+        type: 3}
+      propertyPath: index
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92706dcbb5573ce48aa597bec95d2f52, type: 3}
 --- !u!224 &1420974317 stripped
@@ -5810,14 +5912,14 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 629249189}
           m_MethodName: UpdateLanguage
-          m_Mode: 1
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!1 &1573007375
 GameObject:
@@ -5837,7 +5939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1573007376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6974,6 +7076,7 @@ GameObject:
   - component: {fileID: 1957776014}
   - component: {fileID: 1957776013}
   - component: {fileID: 1957776018}
+  - component: {fileID: 1957776019}
   m_Layer: 5
   m_Name: Manager
   m_TagString: Untagged
@@ -7069,7 +7172,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   runInBackground: 1
   autoStartServerBuild: 1
-  serverTickRate: 30
+  serverTickRate: 60
   offlineScene: 
   onlineScene: 
   transport: {fileID: 1957776015}
@@ -7079,9 +7182,9 @@ MonoBehaviour:
   playerPrefab: {fileID: 206351077102397550, guid: 0e9c5f2fd2c6503469eb96e4ac8ef198,
     type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs: []
-  Server: 0
+  Server: 1
   serverObjects: {fileID: 37719779}
   clientObjects: {fileID: 629249187}
   videoScreen: {fileID: 2778519629238215301}
@@ -7113,6 +7216,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localizedComponents: []
   currentLanguage: 0
+--- !u!114 &1957776019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957776012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7544ea1295037f04ab51852992b910a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VideoInfo:
+  - v_Data:
+    - clip:
+      - {fileID: 32900000, guid: 416559d1cfab141478c55fb3e0506753, type: 3}
+      - {fileID: 32900000, guid: b31b581453b5d6e4787ae4850c08903e, type: 3}
+      Title: title00
+      T_Title: "\u0BA4\u0BB2\u0BC8\u0BAA\u0BCD\u0BAA\u0BC1 "
+      Description: Description00
+      T_Description: "\u0BA4\u0BB2\u0BC8\u0BAA\u0BCD\u0BAA\u0BC1 "
+      thumbnailClip: {fileID: 2800000, guid: 581b60645dc3509428ae7e80fb53a010, type: 3}
+      useVideoClip: 0
+    - clip:
+      - {fileID: 32900000, guid: 3fb345aa32634be419554bba0b6ebda2, type: 3}
+      - {fileID: 32900000, guid: f17d0b8dd06eebc429ec09f99c126384, type: 3}
+      Title: title01
+      T_Title: "\u0BA4\u0BB2\u0BC8\u0BAA\u0BCD\u0BAA\u0BC1 "
+      Description: Description01
+      T_Description: "\u0BA4\u0BB2\u0BC8\u0BAA\u0BCD\u0BAA\u0BC1 "
+      thumbnailClip: {fileID: 2800000, guid: 8b7dd3bdbf0ec2a4ab988f5f041c32c8, type: 3}
+      useVideoClip: 0
+  - v_Data:
+    - clip:
+      - {fileID: 32900000, guid: 3fb345aa32634be419554bba0b6ebda2, type: 3}
+      - {fileID: 32900000, guid: f17d0b8dd06eebc429ec09f99c126384, type: 3}
+      Title: title10
+      T_Title: "\u0BA4\u0BB2\u0BC8\u0BAA\u0BCD\u0BAA\u0BC1 "
+      Description: Description10
+      T_Description: "\u0BA4\u0BB2\u0BC8\u0BAA\u0BCD\u0BAA\u0BC1 "
+      thumbnailClip: {fileID: 2800000, guid: dd1915137afa94443a016d1aee79f91b, type: 3}
+      useVideoClip: 0
+    - clip:
+      - {fileID: 32900000, guid: 416559d1cfab141478c55fb3e0506753, type: 3}
+      - {fileID: 32900000, guid: b31b581453b5d6e4787ae4850c08903e, type: 3}
+      Title: title11
+      T_Title: "\u0BA4\u0BB2\u0BC8\u0BAA\u0BCD\u0BAA\u0BC1 "
+      Description: Description11
+      T_Description: "\u0BA4\u0BB2\u0BC8\u0BAA\u0BCD\u0BAA\u0BC1 "
+      thumbnailClip: {fileID: 2800000, guid: 9cebd6075f56577458723853ac7365bb, type: 3}
+      useVideoClip: 0
 --- !u!1 &1958555193
 GameObject:
   m_ObjectHideFlags: 0
@@ -7505,6 +7659,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024697915155757117, guid: c10c2e9fd663e2740afabc7b69c8cbf9,
+        type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 2800000, guid: 176181e324234e74bb7103136cc5cadc, type: 3}
+    - target: {fileID: 5024697915155757117, guid: c10c2e9fd663e2740afabc7b69c8cbf9,
+        type: 3}
+      propertyPath: index
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c10c2e9fd663e2740afabc7b69c8cbf9, type: 3}
@@ -8009,7 +8173,7 @@ PrefabInstance:
     - target: {fileID: 5518827800327374429, guid: b59d6b722deb0c045b5e3de7d23354ac,
         type: 3}
       propertyPath: point
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59d6b722deb0c045b5e3de7d23354ac, type: 3}
@@ -29289,7 +29453,7 @@ VideoPlayer:
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
-  m_WaitForFirstFrame: 1
+  m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
 --- !u!1 &2778519629690979101
 GameObject:

@@ -39,7 +39,8 @@ public class CollisionManager : MonoBehaviour
     public void ChangePoint(int a)
     {
         val = a;
-        Controller.instance.Interactable(a != -1);
+        Controller.instance.SelectedLevel = a;
+        Controller.instance.Interactable(a != -1, a);
     }
 
 

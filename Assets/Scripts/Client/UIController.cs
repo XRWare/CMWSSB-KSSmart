@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Video;
 
 public class UIController : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class UIController : MonoBehaviour
     public TMP_Text text;
 
     public GameObject startButton;
+
+    public bool AudioUpdated = false;
 
     void Start()
     {
@@ -141,16 +144,50 @@ public class UIController : MonoBehaviour
         Controller.instance.UpdateLanguage(languageToggleVid.isOn ? 1 : 0, false);
     }
 
-    public void UpdateLanguage()
+    public void UpdateLanguage(bool play)
     {
         //if (languageToggle.isOn != languageToggleVid.isOn)
         {
+
             languageToggle.isOn = languageToggleVid.isOn;
             var a = languageToggleVid.isOn ? 1 : 0;
+
+
+
+            VideoPlayer vp = VideoController.instance.player;
+            VideoController.instance.languageUpdated = true;
+
+
+
+            vp.Pause();
+            var temp = vp.frame;
+
+            VideoController.instance.currentVideo = VideoStore._instance.VideoInfo[Controller.instance.SelectedLevel].v_Data[Controller.instance.index].clip[a];
+            vp.clip = VideoController.instance.currentVideo;
+
+            vp.frame = temp;
+
+            AudioUpdated = true;
+
+
+
+
             Controller.instance.UpdateLanguage(a, true);
+            Controller.instance.language = a;
+
             ChangeLanguage();
+
+
+
         }
 
+
+    }
+
+    public void PlayUpdatedAudio(int a)
+    {
+
+        VideoController.instance.player.Play();
 
     }
 
@@ -173,7 +210,7 @@ public class UIController : MonoBehaviour
             }
             else
             {
-
+                VideoController.instance.playbutton.gameObject.SetActive(false);
                 LoadSecondScreen();
                 Controller.instance.BackButton(a);
             }
