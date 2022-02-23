@@ -35,7 +35,6 @@ public class VideoController : MonoBehaviour
 
     public VideoClip currentVideo;
 
-    public bool languageUpdated = false;
     void Start()
     {
         instance = this;
@@ -49,34 +48,34 @@ public class VideoController : MonoBehaviour
     public void Play()
     {
 
-
-
-        if (!player.clip || player.frame == 0 || (player.clip != currentVideo && currentVideo != null))
         {
 
-            player.clip = currentVideo;
-            // UIController.instance.UpdateLanguage();
-            player.frame = 0;
-            slider.value = 0;
-
-
-
+            // player.Play();
         }
-
-
-        {
-
-            player.Play();
-        }
+        Controller.instance.PlayPause(true);
+        StartCoroutine(CheckVideoPlayer());
 
         volumeSliderPanel.SetActive(false);
-        Controller.instance.PlayPause(true);
         playerPlaButton.gameObject.SetActive(false);
         playerPauseButton.gameObject.SetActive(true);
 
 
 
     }
+
+    IEnumerator CheckVideoPlayer()
+    {
+        player.Prepare();
+        while (!player.isPrepared)
+        {
+            Debug.Log("preparing C");
+            yield return new WaitForEndOfFrame();
+        }
+
+
+        Controller.instance.VideoPrepared();
+    }
+
 
     public void Pause()
     {
@@ -94,13 +93,6 @@ public class VideoController : MonoBehaviour
 
         timer.text = Mathf.Floor((int)val / 60).ToString("00") + " : " + ((int)val % 60).ToString("00") + " / " + Mathf.Floor((int)totalVal / 60).ToString("00") + " : " + ((int)totalVal % 60).ToString("00");
 
-        if (languageUpdated)
-        {
-            // player.time = val;
-            languageUpdated = false;
-        }
-
-
     }
 
 
@@ -109,11 +101,9 @@ public class VideoController : MonoBehaviour
 
         if (playerPlaButton.gameObject.activeInHierarchy || overRide)
         {
-
-
-            player.frame = (long)(player.frameCount * slider.value);
+            player.time = (player.length * slider.value);
             Controller.instance.SetVideoTime(slider.value);
-            Debug.Log("Frame " + player.frame);
+
         }
 
     }
@@ -177,11 +167,14 @@ public class VideoController : MonoBehaviour
         }
     }
 
-    // public void SetAudio(int index)
-    // {
-    //     LanguageToggle.isOn = index == 1;
-    // }
 
+    void LateUpdate()
+    {
+        if (player.isPlaying)
+        {
+            SetSlider((float)player.time, (float)player.length);
+        }
+    }
 
 
 

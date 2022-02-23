@@ -40,7 +40,7 @@ public class UIController : MonoBehaviour
 
     public GameObject startButton;
 
-    public bool AudioUpdated = false;
+
 
     void Start()
     {
@@ -152,44 +152,45 @@ public class UIController : MonoBehaviour
             languageToggle.isOn = languageToggleVid.isOn;
             var a = languageToggleVid.isOn ? 1 : 0;
 
-
-
             VideoPlayer vp = VideoController.instance.player;
-            VideoController.instance.languageUpdated = true;
 
+            var temp = vp.isPlaying;
 
-
-            vp.Pause();
-            var temp = vp.frame;
+            VideoController.instance.Pause();
+            var _temp = vp.frame;
 
             VideoController.instance.currentVideo = VideoStore._instance.VideoInfo[Controller.instance.SelectedLevel].v_Data[Controller.instance.index].clip[a];
             vp.clip = VideoController.instance.currentVideo;
 
-            vp.frame = temp;
-
-            AudioUpdated = true;
 
 
+            // AudioUpdated = true;
 
 
-            Controller.instance.UpdateLanguage(a, true);
+
+            languageToggleVid.isOn = languageToggle.isOn;
+            LocalizationManager.instance.SetLanguage(languageToggle.isOn ? Languages.TAMIL : Languages.ENGLISH);
             Controller.instance.language = a;
 
-            ChangeLanguage();
+            Controller.instance.UpdateLanguage(a, true);
 
+            if (play)
+            {
+                vp.Prepare();
+                vp.frame = _temp;
+                Debug.Log("u lang");
 
+                VideoController.instance.Pause();
+                VideoController.instance.SetVideoVal(true);
+
+                VideoController.instance.Play();
+            }
 
         }
 
 
     }
 
-    public void PlayUpdatedAudio(int a)
-    {
-
-        VideoController.instance.player.Play();
-
-    }
 
 
     public void Back(int a)

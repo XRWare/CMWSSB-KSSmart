@@ -26,7 +26,7 @@ public class VideoSelection : MonoBehaviour
 
 
 
-    private bool sliderUpdated = false;
+    public bool videoPrepared = false;
 
 
 
@@ -42,7 +42,7 @@ public class VideoSelection : MonoBehaviour
 
             item.SetActive(false);
         }
-        sliderUpdated = false;
+
 
     }
 
@@ -83,26 +83,33 @@ public class VideoSelection : MonoBehaviour
         videoPlayerPanel.SetActive(true);
         videoThumbnailPanel.SetActive(false);
 
-        if (!player.clip || player.clip != CurrentVideo)
+
         {
 
-            UpdateAudio(Controller.instance.language);
+            // Controller.instance.SyncVideo(player.frame);
 
-            player.clip = CurrentVideo;
-            player.Play();
-
-            //Controller.instance.UpdateSlider((float)player.time, (float)player.length);
-            sliderUpdated = true;
-        }
-
-        if (player.isPaused)
-        {
-            player.Play();
-
+            StartCoroutine(CheckVideoPlayer());
         }
 
 
     }
+
+    IEnumerator CheckVideoPlayer()
+    {
+        player.Prepare();
+        while (!videoPrepared || !player.isPrepared)
+        {
+            Debug.Log("preparing");
+            yield return new WaitForEndOfFrame();
+        }
+
+
+
+        Controller.instance.SyncVideo(Controller.instance.frameCount == -1 ? player.frame : Controller.instance.frameCount);
+
+        videoPrepared = false;
+    }
+
 
     public void PauseVideo()
     {
@@ -113,12 +120,8 @@ public class VideoSelection : MonoBehaviour
     {
 
 
+        player.time = (player.length * percent);
 
-        player.frame = (long)(player.frameCount * percent);
-
-
-        // Controller.instance.UpdateSlider(percent, 1);
-        Debug.Log("Frame server " + player.frame);
 
     }
 
@@ -132,14 +135,14 @@ public class VideoSelection : MonoBehaviour
         Controller.instance.UpdateVolume(player.GetDirectAudioVolume(0));
     }
 
-    void LateUpdate()
-    {
-        if (player.isPlaying)
-        {
-            Controller.instance.UpdateSlider((float)player.time, (float)player.length);
-        }
+    // void LateUpdate()
+    // {
+    //     if (player.isPlaying)
+    //     {
+    //         Controller.instance.UpdateSlider((float)player.time, (float)player.length);
+    //     }
 
-    }
+    // }
 
 
     public void OnVideoCompleted(VideoPlayer vp)
@@ -153,25 +156,16 @@ public class VideoSelection : MonoBehaviour
     {
 
         language = val;
-        //if (player.isPlaying)
         {
 
             player.Pause();
             var a = player.frame;
-
             videoPanel[videoIndex].SetActive(true);
-
             CurrentVideo = VideoStore._instance.VideoInfo[CollisionManager.instance.val].v_Data[videoIndex].clip[language];
             player.clip = CurrentVideo;
-
             player.frame = a;
-
-            {
-                Controller.instance.SyncVideo((int)a);
-            }
-
-            player.Play();
-
+            Controller.instance.frameCount = a;
+            player.Prepare();
         }
 
     }

@@ -14,6 +14,8 @@ public class Controller : NetworkBehaviour
     public float Vert;
 
 
+
+
     public FixedJoystick joystick;
 
     public Text val;
@@ -27,6 +29,9 @@ public class Controller : NetworkBehaviour
     public int SelectedLevel = 0;
     public int language = 0;
     public bool isStatic;
+
+
+    public long frameCount = -1;
 
     public void Start()
     {
@@ -114,23 +119,29 @@ public class Controller : NetworkBehaviour
         VideoSelection.instance.SelectVideo(index);
     }
 
-    [TargetRpc]
-    public void UpdateSlider(float currentTime, float totalTime)
-    {
-        VideoController.instance.SetSlider(currentTime, totalTime);
-    }
 
     [TargetRpc]
     public void VideoCompleted()
     {
+        var Vc = VideoController.instance;
+        Vc.slider.value = 0;
+        // VideoController.instance.SetVideoVal(true);
+        // VideoController.instance.player.Prepare();
+        Vc.player.clip = null;
+        Vc.player.clip = Vc.currentVideo;
+        Vc.player.Prepare();
+
         VideoController.instance.Pause();
+
+        UIController.instance.Back(3);
+
     }
 
 
     [Command]
     public void PlayPause(bool val)
     {
-
+        Debug.Log("play function " + val);
         if (val)
         {
             VideoSelection.instance.PlayVideo();
@@ -174,6 +185,8 @@ public class Controller : NetworkBehaviour
         if (UpdateAudio)
         {
             VideoSelection.instance.UpdateAudio(index);
+
+
         }
         LocalizationManager.instance.SetLanguage(index == 0 ? Languages.ENGLISH : Languages.TAMIL);
     }
@@ -186,10 +199,89 @@ public class Controller : NetworkBehaviour
     }
 
 
-    [TargetRpc]
-    public void SyncVideo(int count)
+    [ClientRpc]
+    public void SyncVideo(long _frameCount)
     {
-        UIController.instance.PlayUpdatedAudio(count);
+        Debug.Log("prepare function " + _frameCount);
+        if (VideoSelection.instance)
+        {
+            Debug.Log("prepare function " + VideoSelection.instance.player.frame);
+
+            if (_frameCount < 0) _frameCount = 1;
+
+
+            {
+                VideoSelection.instance.player.frame = _frameCount;
+            }
+
+            //VideoSelection.instance.player.Play();
+
+            VideoSelection.instance.videoPrepared = false;
+
+            StartCoroutine(UpdateFrame());
+        }
+
+        if (VideoController.instance)
+        {
+            if (_frameCount < 0) _frameCount = 1;
+
+            {
+                VideoController.instance.player.frame = _frameCount;
+            }
+
+            StartCoroutine(UpdateFrame());
+
+        }
 
     }
+
+    IEnumerator UpdateFrame()
+    {
+        if (VideoSelection.instance)
+        {
+            var vp = VideoSelection.instance;
+            vp.player.Prepare();
+            while (!vp.player.isPrepared || !vp.videoPrepared)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            PlaySyncdVideo();
+        }
+
+        if (VideoController.instance)
+        {
+            var vp = VideoController.instance;
+            vp.player.Prepare();
+            while (!vp.player.isPrepared)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            VideoPrepared();
+        }
+    }
+
+
+    [ClientRpc]
+    public void PlaySyncdVideo()
+    {
+        frameCount = -1;
+        VideoSelection.instance?.player.Play();
+
+        VideoController.instance?.player.Play();
+
+
+    }
+
+
+    [Command]
+    public void VideoPrepared()
+    {
+
+
+        VideoSelection.instance.videoPrepared = true;
+
+    }
+
 }

@@ -2414,7 +2414,6 @@ MonoBehaviour:
   languageToggleVid: {fileID: 1569723607}
   text: {fileID: 1190470395}
   startButton: {fileID: 2096987968}
-  AudioUpdated: 0
 --- !u!114 &629249190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2438,7 +2437,6 @@ MonoBehaviour:
   description: {fileID: 520258247}
   player: {fileID: 1085505702}
   currentVideo: {fileID: 0}
-  languageUpdated: 0
 --- !u!114 &629249191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3686,7 +3684,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 0
@@ -29604,6 +29602,7 @@ MonoBehaviour:
   CurrentVideo: {fileID: 0}
   videoThumbnailPanel: {fileID: 2778519629118355803}
   videoPlayerPanel: {fileID: 2778519629690979101}
+  videoPrepared: 0
 --- !u!222 &2778519630294352930
 CanvasRenderer:
   m_ObjectHideFlags: 0
