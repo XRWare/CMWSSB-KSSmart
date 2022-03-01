@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Video;
 public class CollisionManager : MonoBehaviour
 {
     public int val = 0;
 
-
-    public Material[] mat;
+    public int skyVal = 0;
+    public Material mat;
 
     public static CollisionManager instance;
 
+    public VideoClip[] clip;
+
+    public VideoPlayer player;
 
     public GameObject BeginScreen;
     public TMP_Text text;
@@ -28,11 +32,21 @@ public class CollisionManager : MonoBehaviour
     {
         anim.Fade(1, () =>
         {
-            RenderSettings.skybox = mat[val];
-
+            RenderSettings.skybox = mat;
+            player.Pause();
+            player.clip = VideoStore._instance.VideoInfo[val].v_360Data._360Clip[0];
+            player.Play();
             GameObject.FindObjectOfType<Manager>().videoScreen.SetActive(true);
         });
 
+    }
+
+    public void SkyBoxVideo(int a)
+    {
+        skyVal = a;
+        player.Pause();
+        player.clip = VideoStore._instance.VideoInfo[val].v_360Data._360Clip[skyVal];
+        player.Play();
     }
 
 

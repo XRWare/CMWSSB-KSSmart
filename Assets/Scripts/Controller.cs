@@ -284,4 +284,11 @@ public class Controller : NetworkBehaviour
 
     }
 
+
+    [Command]
+    public void SkyBoxval(int a)
+    {
+        CollisionManager.instance.SkyBoxVideo(a);
+    }
+
 }

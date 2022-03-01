@@ -12,6 +12,8 @@ public class VideoStore : MonoBehaviour
     public struct data
     {
         public VideoData[] v_Data;
+
+        public Video360Data v_360Data;
     }
 
     public data[] VideoInfo;
@@ -47,4 +49,15 @@ public class VideoData
     public bool useVideoClip;
 
 
+}
+
+
+[System.Serializable]
+public class Video360Data
+{
+    public VideoClip[] _360Clip;
+
+    public string[] _buttonTitle;
+
+    public string[] _TbuttonTitle;
 }

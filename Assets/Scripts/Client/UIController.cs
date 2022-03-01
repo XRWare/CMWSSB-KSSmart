@@ -254,4 +254,10 @@ public class UIController : MonoBehaviour
 
     }
 
+
+    public void SkyBoxVideo(int a)
+    {
+        Controller.instance.SkyBoxval(a);
+    }
+
 }

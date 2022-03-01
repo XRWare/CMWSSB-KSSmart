@@ -22,7 +22,15 @@ public class ThumbnailPanel : MonoBehaviour
     {
         VideoData vd = VideoStore._instance.VideoInfo[Controller.instance.SelectedLevel].v_Data[index];
 
-        pic.texture = vd.thumbnailClip;
+        if (vd.useVideoClip)
+        {
+            pic.texture = vd.thumbnailClip;
+        }
+        else
+        {
+            pic.texture = vd.thumbnailClip;
+        }
+
 
         title.GetComponent<LocalizedComponent>().EnglishTranslated = vd.Title;
         title.GetComponent<LocalizedComponent>().TamilTranslated = vd.T_Title;
