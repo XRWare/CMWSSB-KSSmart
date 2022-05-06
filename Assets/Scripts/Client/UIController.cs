@@ -40,6 +40,8 @@ public class UIController : MonoBehaviour
 
     public GameObject startButton;
 
+    public TMP_Text title;
+
 
 
     void Start()
@@ -81,6 +83,9 @@ public class UIController : MonoBehaviour
             ControllerScreen.SetActive(true);
             InteractScene.SetActive(false);
             interactButton.gameObject.SetActive(false);
+            title.GetComponent<LocalizedComponent>().EnglishTranslated = "Select an option";
+            title.GetComponent<LocalizedComponent>().TamilTranslated = "தேர்ந்தெடுக்கவும்";
+            title.GetComponent<LocalizedComponent>().SetLanguage(languageToggle.isOn ? Languages.TAMIL : Languages.ENGLISH);
         });
 
 
@@ -97,6 +102,10 @@ public class UIController : MonoBehaviour
              StartScreen.SetActive(false);
              commonScene.SetActive(true);
              VideoPlayerScene.SetActive(false);
+
+             title.GetComponent<LocalizedComponent>().EnglishTranslated = VideoStore._instance.VideoInfo[Controller.instance.SelectedLevel].titleEnglish;
+             title.GetComponent<LocalizedComponent>().TamilTranslated = VideoStore._instance.VideoInfo[Controller.instance.SelectedLevel].titleTamil;
+             title.GetComponent<LocalizedComponent>().SetLanguage(languageToggle.isOn ? Languages.TAMIL : Languages.ENGLISH);
 
              ControllerScreen.SetActive(false);
              InteractScene.SetActive(true);
@@ -221,7 +230,7 @@ public class UIController : MonoBehaviour
         {
             LoadThirdScreen();
             Controller.instance.BackButton(a);
-
+            VideoController.instance.playbutton.gameObject.SetActive(false);
         }
     }
 

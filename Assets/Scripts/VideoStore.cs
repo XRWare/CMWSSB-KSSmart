@@ -11,6 +11,8 @@ public class VideoStore : MonoBehaviour
     [System.Serializable]
     public struct data
     {
+        public string titleEnglish;
+        public string titleTamil;
         public VideoData[] v_Data;
 
         public Video360Data v_360Data;

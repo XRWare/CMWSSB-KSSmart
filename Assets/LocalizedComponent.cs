@@ -18,7 +18,7 @@ public class LocalizedComponent : MonoBehaviour
 
     void OnEnable()
     {
-        LocalizationManager.instance.UpdateLanguage();
+        LocalizationManager.instance?.UpdateLanguage();
     }
 
 

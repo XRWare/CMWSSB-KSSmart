@@ -190,7 +190,11 @@ public class VideoSelection : MonoBehaviour
         }
         else if (a == 3)
         {
+            foreach (var item in videoPanel)
+            {
 
+                item.SetActive(false);
+            }
             player.Pause();
             videoPlayerPanel.SetActive(false);
             videoThumbnailPanel.SetActive(true);
